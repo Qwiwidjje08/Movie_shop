@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">FILM</h2>
+          <h1 class="text-white text-3xl title-font font-medium mb-4">{{movie.title}}</h1>
+
+          <div class="flex border-t border-gray-800 py-2">
+            <span class="text-gray-500">Aktyor</span>
+            <span class="ml-auto text-white">{{movie.actors}}</span>
+          </div>
+          <div class="flex border-t border-gray-800 py-2">
+            <span class="text-gray-500">Country</span>
+            <span class="ml-auto text-white">{{movie.country}}</span>
+          </div>
+          <div class="flex">
+            <span class="title-font font-medium text-2xl text-white">{{movie.published_date}}</span>
+          </div>
+        </div>
+        <video controls poster="{{movie.video.url}}" controls autoplay class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="{{movie.video.url}}">привет</video>
+      </div>
+    </div>
+    <form action="{% url 'detail' movie.id %}" method="POST">
+      {% csrf_token %}
+      {{comment_form.as_p}}
+      <input type="submit" value="Comment qosiw">
+    </form>
+    <h1>{{comment.text}}</h1>
+  </section>
+
+{% endblock %}
